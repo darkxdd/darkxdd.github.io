@@ -1,65 +1,85 @@
-<<!DOCTYPE>
-<!-- add a background image -->
-<!-- add a navbar -->
-<!-- add a footer -->
-<!-- add a contact form -->
-<!-- add a blog -->
-<!-- add a gallery -->
-<!-- add a resume -->
-<!-- add a projects page -->
-<!-- add a about me page -->
-<html>
-<head>
-<title>Puneeth's Corner</title>
+<!doctype html>
+<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+<script src="../components/web-animations-js/web-animations.min.js"></script>
 <style>
-body {
-  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-  background-size: 1800% 1800%;
-  animation: rainbow 15s ease infinite;
-  background-attachment: fixed;
-}
+  body {
+    background-color: black;
+    overflow: hidden;
+  }
 
-@keyframes rainbow {
-  0% {background-position: 0% 82%}
-  50% {background-position: 100% 19%}
-  100% {background-position: 0% 82%}
-}
+  .starfield {
+    background-color: rgba(0,0,0,0);
+  }
 
-.center {
-  text-align: center;
-  color: white;
-}
+  .star0 {
+    height: 1px;
+    width: 1px;
+    opacity: 1;
+    position: absolute;
+  }
 
-.title {
-  font-size: 2em;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-}
+  .star1 {
+    height: 2px;
+    width: 2px;
+    border-radius: 50%;
+    opacity: 1;
+    position: absolute;
+  }
 
-.quirky-text {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 1.2em;
-  color: black; 
-  font-weight: bold; 
-}
+  .star2 {
+    height: 3px;
+    width: 3px;
+    border-radius: 50%;
+    opacity: 1;
+    position: absolute;
+  }
 
-.under-construction {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  font-size: 1.5em;
-  color: #ff4500;
-}
+  .star3 {
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    opacity: 1;
+    position: absolute;
+  }
 
+  .star4 {
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    opacity: 1;
+    position: absolute;
+  }
 </style>
-</head>
-<body>
-  <header class="center">
-    <h1 class="title">Hi, I'm Puneeth Raj</h1>
-  </header>
-  <section class="center">
-    <h1 class="quirky-text">Welcome to my corner of the internet!</h1>
-    <p class="quirky-text">This is my super cool website where I share my intrusive thoughts and wacky ideas.</p>
-    <p class="quirky-text">I'm a 20-year-old Linux enthusiast from India who speaks fluent Python and dreams in Unix.</p>
-    <p class="quirky-text">Hold on tight! The website is still under construction, and it's about to get better...</p>
-    <p class="under-construction">🚧 Caution: Under Construction! 🚧</p>
-  </section>
-</body>
-</html>
+<div id="universe"></div>
+<script>
+  var layerCount = 5;
+  var starCount = 100;
+  var universe = document.getElementById('universe');
+  var w = window;
+  var d = document;
+  var e = d.documentElement;
+  var g = d.getElementsByTagName('body')[0];
+  var width = w.innerWidth || e.clientWidth || g.clientWidth;
+  var height = w.innerHeight|| e.clientHeight|| g.clientHeight;
+  for (var l = 0; l < layerCount; ++l) {
+    var layer = document.createElement('div');
+    layer.setAttribute('id', 'layer' + l);
+    layer.setAttribute('class', 'starfield');
+    universe.appendChild(layer);
+    for (var i = 0; i < starCount; ++i) {
+      var xpos = Math.round(Math.random() * width);
+      var ypos = Math.round(Math.random() * height);
+      for (var s = 0; s < 2; ++s) {
+        var star = document.createElement('div');
+        star.setAttribute('class', 'star' + l);
+        star.style.webkitTransform = 'translate(' + (xpos + s * width) + 'px, ' + ypos + 'px)';
+        star.style.transform = 'translate(' + (xpos + s * width) + 'px, ' + ypos + 'px)';
+        star.style.backgroundColor = 'white';//rgb(' + Math.round(Math.random() * 255) + ', ' + Math.round(Math.random() * 255) + ', ' + Math.round(Math.random() * 255) + ')';
+        layer.appendChild(star);
+      }
+    }
+    layer.animate([{transform: 'translate3d(0, 0, 0)'},
+                   {transform: 'translate3d(-' + width + 'px, 0, 0)'}],
+                  {duration: Math.pow(2, layerCount - l) * 1000, iterations: Infinity});
+  }
+</script>
