@@ -1,67 +1,64 @@
-<!doctype html>
-<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
-<link href="rain.css" rel="stylesheet" />
-<style>
-  body {
-    background-color: black;
-    overflow: hidden;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rain and Stars</title>
+    <link href="rain.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .star {
+            height: 1px;
+            width: 1px;
+            background-color: white;
+            position: absolute;
+            opacity: 0.8;
+        }
+        
+        .rain {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: #00f;
+            animation: rain 1s linear infinite;
+            z-index: 2; /* Ensure rain appears above stars */
+        }
+        
+        @keyframes rain {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="universe"></div>
+    <div class="rain front-row"></div>
+    <div class="rain back-row"></div>
 
-  .star0 {
-    height: 1px;
-    width: 1px;
-    opacity: 1;
-    position: absolute;
-  }
+    <script>
+        var layerCount = 4;
+        var starCount = 500;
+        var maxTime = 31;
+        var universe = document.getElementById('universe');
+        var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        
+        for (var i = 0; i < starCount; ++i) {
+            var ypos = Math.round(Math.random() * height);
+            var star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * width + 'px';
+            star.style.top = ypos + 'px';
+            universe.appendChild(star);
+        }
+    </script>
 
-  .star1 {
-    height: 2px;
-    width: 2px;
-    border-radius: 50%;
-    opacity: 1;
-    position: absolute;
-  }
-
-  .star2 {
-    height: 3px;
-    width: 3px;
-    border-radius: 50%;
-    opacity: 1;
-    position: absolute;
-  }
-
-  .star3 {
-    height: 4px;
-    width: 4px;
-    border-radius: 50%;
-    opacity: 1;
-    position: absolute;
-  }
-</style>
-<div id="universe"></div>
-<div class="rain front-row"></div>
-<div class="rain back-row"></div>
-<script>
-  var layerCount = 4;
-  var starCount = 500;
-  var maxTime = 31;
-  var universe = document.getElementById('universe');
-  var w = window;
-  var d = document;
-  var e = d.documentElement;
-  var g = d.getElementsByTagName('body')[0];
-  var width = w.innerWidth || e.clientWidth || g.clientWidth;
-  var height = w.innerHeight|| e.clientHeight|| g.clientHeight;
-  for (var i = 0; i < starCount; ++i) {
-    var ypos = Math.round(Math.random() * height);
-    var star = document.createElement('div');
-    var speed = 1000 * (Math.random() * maxTime + 1);
-    star.setAttribute('class', 'star' + (3 - Math.floor((speed / 1000) / 8)));
-    star.style.backgroundColor = 'white';//rgb(' + Math.round(Math.random() * 255) + ', ' + Math.round(Math.random() * 255) + ', ' + Math.round(Math.random() * 255) + ')';
-    universe.appendChild(star);
-    star.animate([{transform: 'translate3d(' + width + 'px, ' + ypos + 'px, 0)'},
-                  {transform: 'translate3d(-' + Math.random() * 256 + 'px, ' + ypos + 'px, 0)'}],
-                 {delay: Math.random() * -speed, duration: speed, iterations: 1000});
-  }
-</script>
-<script src="js/rain.js"></script>
+    <script src="js/rain.js"></script>
+</body>
+</html>
