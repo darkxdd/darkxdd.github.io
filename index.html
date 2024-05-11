@@ -1,5 +1,6 @@
 <!doctype html>
 <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no">
+<link href="rain.css" rel="stylesheet" />
 <style>
   body {
     background-color: black;
@@ -38,6 +39,8 @@
   }
 </style>
 <div id="universe"></div>
+<div class="rain front-row"></div>
+<div class="rain back-row"></div>
 <script>
   var layerCount = 4;
   var starCount = 500;
@@ -61,3 +64,4 @@
                  {delay: Math.random() * -speed, duration: speed, iterations: 1000});
   }
 </script>
+<script src="js/rain.js"></script>
